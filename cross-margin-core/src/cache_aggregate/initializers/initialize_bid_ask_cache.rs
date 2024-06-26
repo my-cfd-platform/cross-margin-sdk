@@ -8,7 +8,7 @@ use crate::{
 pub async fn initialize_bid_ask_cache(
     instruments: Vec<CrossMarginCacheInstrument>,
     collaterals: Vec<String>,
-    prices: Vec<CrossMarginBidAsk>
+    prices: Vec<CrossMarginBidAsk>,
 ) -> CrossMarginBidAskCache {
     let mut crosses = HashSet::new();
     let prices_snapshot = prices
@@ -33,7 +33,11 @@ pub async fn initialize_bid_ask_cache(
             id: x.id.clone(),
             base: x.base.clone(),
             quote: x.quote.clone(),
-            active_price: prices_snapshot.get(&x.id).map(|x| x.to_owned()).unwrap(),
+            active_price: prices_snapshot
+                .get(&x.id)
+                .map(|x| x.to_owned())
+                .expect(format!("No price for instrument {}", x.id).as_str())
+                .clone(),
         })
         .collect::<Vec<_>>();
 
