@@ -1,0 +1,12 @@
+[package]
+name = "cross-margin-core"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+metrics = "*"
+serde = { version = "*", features = ["derive"] }
+service-sdk = { git = "https://github.com/MyJetTools/service-sdk.git", tag = "0.2.5", features = [
+] }
+chrono = "*"
+tokio = { version = "*", features = ["full"] }

@@ -1,0 +1,1 @@
+pub extern crate cross_margin_core as core;

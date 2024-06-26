@@ -1,0 +1,4 @@
+[workspace]
+members = [
+    "cross-margin-core", "cross-margin-sdk",
+]
