@@ -20,6 +20,9 @@ pub fn calculate_account_data(
         margin,
         equity,
         free_margin: equity - margin,
-        margin_level: equity / margin * 100.0,
+        margin_level: match margin < 0.0001 {
+            true => 0.0,
+            false => equity / margin * 100.0,
+        },
     }
 }
