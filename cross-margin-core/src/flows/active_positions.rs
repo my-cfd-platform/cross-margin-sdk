@@ -32,7 +32,7 @@ pub fn update_position_rates(
         false => profit_bid_ask.ask,
     };
 
-    active_position.update_asset_price(profit_bid_ask.as_ref().clone(), profit_rate);
+    active_position.update_profit_price(profit_bid_ask.as_ref().clone(), profit_rate);
     active_position.update_asset_price(
         asset_price.as_ref().clone(),
         asset_price.get_close_price(active_position.get_side()),
