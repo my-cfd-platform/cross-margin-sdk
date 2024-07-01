@@ -28,8 +28,8 @@ pub fn update_position_rates(
     )?;
 
     let profit_rate = match active_position.get_pl() > 0.0 {
-        true => profit_bid_ask.get_close_price(active_position.get_side()),
-        false => profit_bid_ask.get_open_price(active_position.get_side()),
+        true => profit_bid_ask.bid,
+        false => profit_bid_ask.ask,
     };
 
     active_position.update_asset_price(profit_bid_ask.as_ref().clone(), profit_rate);

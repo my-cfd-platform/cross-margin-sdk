@@ -105,14 +105,14 @@ fn calculate_specific_instrument_margin(
             &CrossMarginPositionSide::Sell => {
                 if sell_hedge_amount < position.get_lots_amount() {
                     hedged_positions.push(MarginCalculationDto {
-                        leverage: leverage,
+                        leverage,
                         lots_amount: sell_hedge_amount,
                         contract_size: position.get_lots_size(),
                         margin_rate: position.get_margin_price(),
                         side: position.get_side().clone(),
                     });
                     not_hedged_positions.push(MarginCalculationDto {
-                        leverage: leverage,
+                        leverage,
                         lots_amount: position.get_lots_amount() - sell_hedge_amount,
                         contract_size: position.get_lots_size(),
                         margin_rate: position.get_margin_price(),
