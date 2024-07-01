@@ -1,4 +1,6 @@
-use crate::{positions::CrossMarginActivePosition, CrossMarginCloseReason};
+use crate::{
+    positions::CrossMarginActivePosition, CrossMarginCloseReason, CrossMarginPositionSide,
+};
 
 pub fn get_position_close_reason<T: CrossMarginActivePosition>(
     active_position: &T,
@@ -21,8 +23,8 @@ fn is_sl_triggered(position: &impl CrossMarginActivePosition) -> bool {
 
     if let Some(sl) = position.get_sl_price() {
         return match &position.get_side() {
-            CrossMarginPositionSide => sl >= position.get_active_price(),
-            CrossMarginPositionSide => sl <= position.get_active_price(),
+            CrossMarginPositionSide::Buy => sl >= position.get_active_price(),
+            CrossMarginPositionSide::Sell => sl <= position.get_active_price(),
         };
     }
 
@@ -35,9 +37,9 @@ fn is_tp_triggered(position: &impl CrossMarginActivePosition) -> bool {
     }
 
     if let Some(tp) = position.get_tp_price() {
-        return match &position.get_side() {
-            CrossMarginPositionSide => tp <= position.get_active_price(),
-            CrossMarginPositionSide => tp >= position.get_active_price(),
+        return match position.get_side() {
+            CrossMarginPositionSide::Buy => tp <= position.get_active_price(),
+            CrossMarginPositionSide::Sell => tp >= position.get_active_price(),
         };
     }
 

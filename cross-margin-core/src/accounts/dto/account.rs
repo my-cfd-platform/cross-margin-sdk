@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 
+use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use service_sdk::rust_extensions::date_time::DateTimeAsMicroseconds;
 
 use crate::{
@@ -7,7 +8,7 @@ use crate::{
     positions::CrossMarginActivePosition,
 };
 
-pub trait CrossMarginAccount: Clone {
+pub trait CrossMarginAccount: Clone + Serialize + DeserializeOwned {
     fn get_trader_id(&self) -> &str;
     fn get_id(&self) -> &str;
     fn get_stop_out(&self) -> f64;

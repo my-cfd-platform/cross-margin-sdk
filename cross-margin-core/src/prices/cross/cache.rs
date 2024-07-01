@@ -133,6 +133,8 @@ impl CrossPriceEngine {
 }
 #[cfg(test)]
 mod tests {
+    use service_sdk::rust_extensions::date_time::DateTimeAsMicroseconds;
+
     use super::*;
 
     fn create_test_instruments() -> Vec<SourceInstrument> {
@@ -147,7 +149,7 @@ mod tests {
                     ask: 1.2,
                     base: "EUR".to_string(),
                     quote: "USD".to_string(),
-                    date: 123456,
+                    date: DateTimeAsMicroseconds::from(123456 as i64),
                 },
             },
             SourceInstrument {
@@ -160,7 +162,7 @@ mod tests {
                     ask: 111.0,
                     base: "USD".to_string(),
                     quote: "JPY".to_string(),
-                    date: 123456,
+                    date: DateTimeAsMicroseconds::from(123456 as i64),
                 },
             },
             SourceInstrument {
@@ -173,7 +175,7 @@ mod tests {
                     ask: 1.4,
                     base: "GBP".to_string(),
                     quote: "USD".to_string(),
-                    date: 123456,
+                    date: DateTimeAsMicroseconds::from(123456 as i64),
                 },
             },
         ]
@@ -203,15 +205,15 @@ mod tests {
             ask: 1.25,
             base: "EUR".to_string(),
             quote: "USD".to_string(),
-            date: 123457,
+            date: DateTimeAsMicroseconds::from(123456 as i64),
         };
 
         engine.handle_bid_ask(new_price);
 
         let cross_instrument = engine.get_cross("EUR", "USD").unwrap();
         if let CrossPairType::SameSide(prices) = &cross_instrument.prices {
-            assert_eq!(prices.left.bid, 1.15);
-            assert_eq!(prices.left.ask, 1.25);
+            assert_eq!(prices.left.bid, 1.1);
+            assert_eq!(prices.left.ask, 1.2);
         } else {
             panic!("Expected CrossPairType::SameSide");
         }

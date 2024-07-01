@@ -1,6 +1,7 @@
 use crate::{
     cache_aggregate::CrossMarginCaches,
-    flows::{is_enough_balance_to_open_position, is_pending_ready_to_execute},
+    flows::is_pending_ready_to_execute,
+    is_enough_balance_to_open_position_sync,
     positions::{
         CrossMarginActivePosition, CrossMarginPendingPosition,
         CrossMarginPendingPositionExecuteReason, CrossMarginPositionsCacheQueryBuilder,
@@ -32,7 +33,7 @@ pub async fn remove_orders_ready_to_execute<
             .with_quote(&bid_ask.quote),
         |pending| {
             if is_pending_ready_to_execute(pending, bid_ask) {
-                let is_ready_to_open = is_enough_balance_to_open_position(
+                let is_ready_to_open = is_enough_balance_to_open_position_sync(
                     account_cache,
                     active_cache,
                     prices_cache,

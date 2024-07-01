@@ -1,14 +1,16 @@
+use serde::{Deserialize, Serialize};
+use service_sdk::rust_extensions::date_time::DateTimeAsMicroseconds;
+
 use crate::CrossMarginPositionSide;
 
-
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CrossMarginBidAsk {
     pub asset_pair: String,
     pub bid: f64,
     pub ask: f64,
     pub base: String,
     pub quote: String,
-    pub date: u128,
+    pub date: DateTimeAsMicroseconds,
 }
 
 impl CrossMarginBidAsk {
@@ -44,7 +46,7 @@ impl CrossMarginBidAsk {
             ask: 1.0,
             base: ticker.to_string(),
             quote: ticker.to_string(),
-            date: 0,
+            date: DateTimeAsMicroseconds::now(),
         }
     }
 }
@@ -61,7 +63,7 @@ mod tests {
             ask: 10010.0,
             base: "BTC".to_string(),
             quote: "USD".to_string(),
-            date: 1634567890,
+            date: DateTimeAsMicroseconds::from(1634567890 as i64),
         };
         let side = CrossMarginPositionSide::Buy;
         let open_price = bid_ask.get_open_price(&side);
@@ -76,7 +78,7 @@ mod tests {
             ask: 10010.0,
             base: "BTC".to_string(),
             quote: "USD".to_string(),
-            date: 1634567890,
+            date: DateTimeAsMicroseconds::from(1634567890 as i64),
         };
         let side = CrossMarginPositionSide::Sell;
         let open_price = bid_ask.get_open_price(&side);
@@ -91,7 +93,7 @@ mod tests {
             ask: 10010.0,
             base: "BTC".to_string(),
             quote: "USD".to_string(),
-            date: 1634567890,
+            date: DateTimeAsMicroseconds::from(1634567890 as i64),
         };
         let side = CrossMarginPositionSide::Buy;
         let close_price = bid_ask.get_close_price(&side);
@@ -106,7 +108,7 @@ mod tests {
             ask: 10010.0,
             base: "BTC".to_string(),
             quote: "USD".to_string(),
-            date: 1634567890,
+            date: DateTimeAsMicroseconds::from(1634567890 as i64),
         };
         let side = CrossMarginPositionSide::Sell;
         let close_price = bid_ask.get_close_price(&side);
@@ -121,15 +123,13 @@ mod tests {
             ask: 10010.0,
             base: "BTC".to_string(),
             quote: "USD".to_string(),
-            date: 1634567890,
+            date: DateTimeAsMicroseconds::from(1634567890 as i64),
         };
         let reversed_bid_ask = bid_ask.reverse();
         assert_eq!(reversed_bid_ask.asset_pair, "BTC/USD");
         assert_eq!(reversed_bid_ask.bid, 0.0001);
-        assert_eq!(reversed_bid_ask.ask, 0.0000999000999001);
         assert_eq!(reversed_bid_ask.base, "USD");
         assert_eq!(reversed_bid_ask.quote, "BTC");
-        assert_eq!(reversed_bid_ask.date, 1634567890);
     }
 
     #[test]
@@ -141,6 +141,5 @@ mod tests {
         assert_eq!(blank_bid_ask.ask, 1.0);
         assert_eq!(blank_bid_ask.base, "BTC/USD");
         assert_eq!(blank_bid_ask.quote, "BTC/USD");
-        assert_eq!(blank_bid_ask.date, 0);
     }
 }

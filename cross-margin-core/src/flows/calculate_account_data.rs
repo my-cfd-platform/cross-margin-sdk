@@ -1,8 +1,10 @@
+use serde::{Deserialize, Serialize};
+
 use crate::{positions::CrossMarginActivePosition, CrossMarginAccount};
 
 use super::calculate_margin;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccountCalculationResult {
     pub margin: f64,
     pub equity: f64,

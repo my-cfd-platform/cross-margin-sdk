@@ -1,9 +1,11 @@
+use serde::{de::DeserializeOwned, Serialize};
+
 use crate::{CrossMarginBidAsk, CrossMarginCloseReason};
 
 use super::{CrossMarginCacheIndexGenerator, CrossMarginClosedPosition, CrossMarginPosition};
 
 pub trait CrossMarginActivePosition:
-    Clone + CrossMarginCacheIndexGenerator + CrossMarginPosition
+    Clone + CrossMarginCacheIndexGenerator + CrossMarginPosition + Serialize + DeserializeOwned
 {
     fn get_pl(&self) -> f64;
     fn update_pl(&mut self, pl: f64);

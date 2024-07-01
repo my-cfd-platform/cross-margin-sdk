@@ -1,3 +1,5 @@
+use service_sdk::rust_extensions::date_time::DateTimeAsMicroseconds;
+
 use crate::prices::dto::CrossMarginBidAsk;
 
 #[derive(Debug, Clone)]
@@ -153,7 +155,7 @@ impl CrossInstrument {
             ask,
             base: self.base.clone(),
             quote: self.quote.clone(),
-            date: 0,
+            date: DateTimeAsMicroseconds::from(123456 as i64),
         }
     }
 }

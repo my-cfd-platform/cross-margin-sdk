@@ -10,3 +10,4 @@ service-sdk = { git = "https://github.com/MyJetTools/service-sdk.git", tag = "0.
 ] }
 chrono = "*"
 tokio = { version = "*", features = ["full"] }
+trade-log = { git = "https://github.com/MyJetTools/trade-log.git", tag = "0.1.7" }

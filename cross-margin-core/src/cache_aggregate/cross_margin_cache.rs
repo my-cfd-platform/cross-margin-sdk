@@ -87,7 +87,7 @@ where
         });
     }
 
-    pub fn is_enough_balance_to_open_position(
+    pub async fn is_enough_balance_to_open_position(
         &self,
         account_id: &str,
         lots_size: f64,
@@ -102,7 +102,8 @@ where
             lots_size,
             lots_amount,
             base,
-        );
+        )
+        .await;
     }
 
     pub async fn handle_bid_ask(
