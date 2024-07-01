@@ -1,8 +1,8 @@
 use serde::{de::DeserializeOwned, Serialize};
 
-use crate::{CrossMarginBidAsk, CrossMarginCloseReason};
+use crate::CrossMarginBidAsk;
 
-use super::{CrossMarginCacheIndexGenerator, CrossMarginClosedPosition, CrossMarginPosition};
+use super::{CrossMarginCacheIndexGenerator, CrossMarginPosition};
 
 pub trait CrossMarginActivePosition:
     Clone + CrossMarginCacheIndexGenerator + CrossMarginPosition + Serialize + DeserializeOwned

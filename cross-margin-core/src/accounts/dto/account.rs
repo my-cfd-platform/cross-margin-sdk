@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use serde::{de::DeserializeOwned, Deserialize, Serialize};
+use serde::{de::DeserializeOwned, Serialize};
 use service_sdk::rust_extensions::date_time::DateTimeAsMicroseconds;
 
 use crate::{

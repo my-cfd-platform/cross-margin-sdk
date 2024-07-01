@@ -126,7 +126,7 @@ where
     pub async fn add_active_position(
         &mut self,
         position: AP,
-        process_id: &str,
+        _: &str,
     ) -> Result<(), CrossMarginError> {
         self.active_positions_cache.add_position(position.clone());
         return Ok(());

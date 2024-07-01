@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 
 use super::{
-    CrossMarginActivePosition, CrossMarginPosition, CrossMarginPositionsCacheIndexes,
+    CrossMarginPosition, CrossMarginPositionsCacheIndexes,
     CrossMarginPositionsCacheQueryBuilder, CrossMarginPositionsOneOfBulkQueryBuilder,
 };
 
