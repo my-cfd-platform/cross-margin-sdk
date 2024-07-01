@@ -43,8 +43,6 @@ pub async fn is_enough_balance_to_open_position<
     let new_position_margin = lots_size * lots_amount / target_leverage
         * margin_bid_ask.get_open_price(&CrossMarginPositionSide::Buy);
 
-    let required_margin = lots_size * lots_amount / target_leverage * new_position_margin;
-
     trade_log::trade_log!(
         account.get_trader_id(),
         account.get_id(),
@@ -57,11 +55,10 @@ pub async fn is_enough_balance_to_open_position<
         "account_props" = &account_props,
         "margin_bid_ask" = margin_bid_ask.as_ref(),
         "new_position_margin" = &new_position_margin,
-        "required_margin" = &required_margin,
         "target_leverage" = &target_leverage
     );
 
-    return Ok(account_props.free_margin >= required_margin);
+    return Ok(account_props.free_margin >= new_position_margin);
 }
 
 
@@ -103,7 +100,5 @@ pub fn is_enough_balance_to_open_position_sync<
     let new_position_margin = lots_size * lots_amount / target_leverage
         * margin_bid_ask.get_open_price(&CrossMarginPositionSide::Buy);
 
-    let required_margin = lots_size * lots_amount / target_leverage * new_position_margin;
-
-    return Ok(account_props.free_margin >= required_margin);
+    return Ok(account_props.free_margin >= new_position_margin);
 }
