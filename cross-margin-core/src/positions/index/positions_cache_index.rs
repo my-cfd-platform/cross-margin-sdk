@@ -794,4 +794,16 @@ mod tests {
 
         assert_eq!(2, result1.len());
     }
+
+    #[test]
+    fn test_search_by_clienasdt_ident_few() {
+        let min: f64 = 10.0;
+        let max: f64 = 100.0;
+
+        let target: f64 = min.min(max);
+        let target2: f64 = max.min(min);
+
+        println!("{} {}, {:?}", min, max, target);
+        println!("{} {}, {:?}", min, max, target2);
+    }
 }

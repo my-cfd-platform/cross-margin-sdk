@@ -27,7 +27,7 @@ pub fn calculate_margin(
     for (instrument, positions) in grouped_positions {
         margin += calculate_specific_instrument_margin(
             &positions,
-            account.get_balance(),
+            account.get_leverage(),
             account.get_instruments_leverages().get(instrument),
         )
         ;
