@@ -41,6 +41,7 @@ pub async fn remove_orders_ready_to_execute<
                     pending.get_lots_size(),
                     pending.get_lots_amount(),
                     pending.get_base(),
+                    pending.get_instrument_id()
                 );
 
                 let Ok(is_ready_to_open) = is_ready_to_open else {

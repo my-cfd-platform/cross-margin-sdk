@@ -93,6 +93,7 @@ where
         lots_size: f64,
         lots_amount: f64,
         base: &str,
+        instrument_id: &str,
     ) -> Result<bool, CrossMarginError> {
         return is_enough_balance_to_open_position(
             &self.accounts_cache,
@@ -102,6 +103,7 @@ where
             lots_size,
             lots_amount,
             base,
+            instrument_id
         )
         .await;
     }
